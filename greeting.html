@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RYATH Technologies | Season's Greetings</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@200;400&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg-color: #050a14;
+        --gold-gradient: linear-gradient(
+          135deg,
+          #c3a343 0%,
+          #f5e0a3 50%,
+          #c3a343 100%
+        );
+        --glass-bg: rgba(255, 255, 255, 0.03);
+        --gold-text: #d4af37;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: "Montserrat", sans-serif;
+        color: #ffffff;
+        overflow: hidden;
+        perspective: 1000px;
+      }
+
+      .ambient-bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at 50% 50%, #102142 0%, #050a14 70%);
+        z-index: -1;
+      }
+
+      .card-wrapper {
+        width: 100%;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10;
+      }
+
+      #main-card {
+        background: var(--glass-bg);
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        padding: clamp(30px, 8vw, 60px) clamp(20px, 5vw, 40px);
+        width: 100%;
+        max-width: 450px;
+        border-radius: 4px;
+        border: 1px solid rgba(195, 163, 67, 0.2);
+        box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+        display: none;
+        text-align: center; /* TEXT CENTER ALIGN */
+        animation: premiumEntry 2.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+      }
+
+      @keyframes premiumEntry {
+        from {
+          opacity: 0;
+          transform: scale(1.05) translateY(20px);
+          filter: blur(10px);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1) translateY(0);
+          filter: blur(0);
+        }
+      }
+
+      h2 {
+        font-family: "Cinzel", serif;
+        font-size: clamp(0.7rem, 2.5vw, 0.85rem);
+        letter-spacing: clamp(3px, 1.5vw, 6px);
+        color: var(--gold-text);
+        margin-bottom: clamp(15px, 5vw, 30px);
+        text-transform: uppercase;
+      }
+
+      h1 {
+        font-family: "Cinzel", serif;
+        font-size: clamp(1.8rem, 8vw, 2.8rem);
+        font-weight: 400;
+        line-height: 1.1;
+        margin-bottom: clamp(15px, 5vw, 25px);
+        background: var(--gold-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .message {
+        font-weight: 200;
+        line-height: 1.8;
+        letter-spacing: 0.5px;
+        color: rgba(255, 255, 255, 0.7);
+        margin-bottom: clamp(20px, 6vw, 40px);
+        font-size: clamp(0.85rem, 3vw, 1rem);
+      }
+
+      .line {
+        width: 35px;
+        height: 1.5px;
+        background: var(--gold-text);
+        margin: 0 auto clamp(15px, 5vw, 30px); /* Centers the line */
+        opacity: 0.6;
+      }
+
+      #init-btn {
+        background: none;
+        border: 1px solid var(--gold-text);
+        color: var(--gold-text);
+        padding: clamp(12px, 4vw, 18px) clamp(30px, 8vw, 45px);
+        font-family: "Cinzel", serif;
+        font-size: clamp(0.8rem, 2.5vw, 1rem);
+        letter-spacing: 4px;
+        cursor: pointer;
+        transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        outline: none;
+      }
+
+      #init-btn:hover {
+        background: var(--gold-text);
+        color: #000;
+        box-shadow: 0 0 40px rgba(195, 163, 67, 0.3);
+      }
+
+      canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 5;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="ambient-bg"></div>
+    <canvas id="snowCanvas"></canvas>
+
+    <div class="card-wrapper">
+      <button id="init-btn">OPEN GREETING</button>
+
+      <div id="main-card">
+        <h2>Season's Greetings</h2>
+        <div class="line"></div>
+        <h1>
+          Merry <br />
+          Christmas
+        </h1>
+        <p class="message">
+          Reflecting on a year of growth and partnership. <br />
+          Wishing you a season of refined peace <br />and a prosperous new year.
+        </p>
+        <div class="line"></div>
+        <p
+          style="
+            letter-spacing: 4px;
+            font-size: 0.65rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 700;
+            text-transform: uppercase;
+          "
+        >
+          DILSHAN THILINA
+        </p>
+      </div>
+    </div>
+
+    <script>
+      const btn = document.getElementById("init-btn");
+      const card = document.getElementById("main-card");
+      const canvas = document.getElementById("snowCanvas");
+      const ctx = canvas.getContext("2d");
+
+      let particles = [];
+      let animationActive = false;
+
+      function initCanvas() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+      }
+
+      class Particle {
+        constructor(type) {
+          this.type = type;
+          this.init();
+        }
+        init() {
+          this.x = Math.random() * canvas.width;
+          this.y = Math.random() * canvas.height;
+          this.size =
+            this.type === "snow" ? Math.random() * 2 + 1 : Math.random() * 1.2;
+          this.speedY =
+            this.type === "snow"
+              ? Math.random() * 0.8 + 0.3
+              : Math.random() * 0.4 + 0.1;
+          this.speedX = Math.random() * 0.4 - 0.2;
+          this.opacity = Math.random() * 0.5 + 0.2;
+        }
+        update() {
+          this.y += this.speedY;
+          this.x += this.speedX;
+          if (this.y > canvas.height) {
+            this.y = -10;
+            this.x = Math.random() * canvas.width;
+          }
+        }
+        draw() {
+          ctx.beginPath();
+          ctx.fillStyle =
+            this.type === "snow"
+              ? `rgba(255, 255, 255, ${this.opacity})`
+              : `rgba(195, 163, 67, ${this.opacity})`;
+          ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+
+      function createEffects() {
+        particles = [];
+        const count = window.innerWidth < 600 ? 80 : 150;
+        for (let i = 0; i < count; i++)
+          particles.push(new Particle(i % 3 === 0 ? "gold" : "snow"));
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach((p) => {
+          p.update();
+          p.draw();
+        });
+        requestAnimationFrame(animate);
+      }
+
+      btn.addEventListener("click", () => {
+        btn.style.opacity = "0";
+        setTimeout(() => {
+          btn.style.display = "none";
+          card.style.display = "block";
+          initCanvas();
+          createEffects();
+          if (!animationActive) {
+            animate();
+            animationActive = true;
+          }
+        }, 600);
+      });
+
+      window.addEventListener("resize", () => {
+        initCanvas();
+        createEffects();
+      });
+    </script>
+  </body>
+</html>
