@@ -3,7 +3,7 @@
 A minimalist, high-end interactive digital Christmas greeting card. This project features a luxury aesthetic with gold accents, sophisticated typography, and a custom-built particle system.
 
 ## ✨ Live Preview
-You can view the live greeting here: [Link to your GitHub Pages URL]
+You can view the live greeting here: https://thilina-fer.github.io/my-christmas-greeting/
 
 ## 📸 Features
 
@@ -22,8 +22,3 @@ You can view the live greeting here: [Link to your GitHub Pages URL]
 * **JavaScript (ES6):** * **Canvas API:** Used for the high-performance particle animation.
     * **Object-Oriented Programming:** Particles are managed through a `Particle` class for efficient rendering.
 
-## 🚀 Installation & Usage
-
-1. **Clone the repository:**
-   ```bash
-   git clone [https://github.com/thilina-fer/my-christmas-greeting.git](https://github.com/thilina-fer/my-christmas-greeting.git)
